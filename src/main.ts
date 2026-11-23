@@ -188,7 +188,7 @@ async function runSelfTest(windowId: string): Promise<void> {
       }
       const client = new Client({
         name: 'surfboard-self-test',
-        version: '0.1.0',
+        version: app.getVersion(),
       });
       const transport = new StreamableHTTPClientTransport(
         new URL(connection.url),

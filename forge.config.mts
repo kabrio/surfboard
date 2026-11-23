@@ -1,4 +1,7 @@
 import type { ForgeConfig } from '@electron-forge/shared-types';
+import { execFile } from 'node:child_process';
+import { readdir } from 'node:fs/promises';
+import path from 'node:path';
 import { MakerSquirrel } from '@electron-forge/maker-squirrel';
 import { MakerZIP } from '@electron-forge/maker-zip';
 import { MakerDeb } from '@electron-forge/maker-deb';
@@ -6,6 +9,21 @@ import { VitePlugin } from '@electron-forge/plugin-vite';
 import { FusesPlugin } from '@electron-forge/plugin-fuses';
 import { AutoUnpackNativesPlugin } from '@electron-forge/plugin-auto-unpack-natives';
 import { FuseV1Options, FuseVersion } from '@electron/fuses';
+
+const runCodesign = (args: string[]) =>
+  new Promise<void>((resolve, reject) => {
+    execFile('codesign', args, (error, stdout, stderr) => {
+      if (error) {
+        reject(
+          new Error(
+            `codesign failed: ${error.message}${stdout || stderr ? `\n${stdout}${stderr}` : ''}`,
+          ),
+        );
+        return;
+      }
+      resolve();
+    });
+  });
 
 const config: ForgeConfig = {
   packagerConfig: {
@@ -27,6 +45,35 @@ const config: ForgeConfig = {
   },
   rebuildConfig: {
     force: true,
+  },
+  hooks: {
+    postPackage: async (_config, { platform, outputPaths }) => {
+      if (platform !== 'darwin') return;
+
+      const appPaths: string[] = [];
+      for (const outputPath of outputPaths) {
+        if (outputPath.endsWith('.app')) {
+          appPaths.push(outputPath);
+          continue;
+        }
+        const entries = await readdir(outputPath, { withFileTypes: true });
+        for (const entry of entries) {
+          if (entry.isDirectory() && entry.name.endsWith('.app')) {
+            appPaths.push(path.join(outputPath, entry.name));
+          }
+        }
+      }
+      if (appPaths.length === 0) {
+        throw new Error(
+          `Forge did not produce a macOS app bundle: ${outputPaths.join(', ')}`,
+        );
+      }
+
+      for (const appPath of appPaths) {
+        await runCodesign(['--force', '--deep', '--sign', '-', appPath]);
+        await runCodesign(['--verify', '--deep', '--strict', appPath]);
+      }
+    },
   },
   makers: [
     new MakerSquirrel({}),

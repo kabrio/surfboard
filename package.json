@@ -1,7 +1,7 @@
 {
   "name": "surfboard",
   "productName": "SURFBOARD",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "description": "A desktop workspace that unifies browser and terminal sessions.",
   "license": "MIT",

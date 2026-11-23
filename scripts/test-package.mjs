@@ -1,10 +1,13 @@
-import { spawn } from 'node:child_process';
+import { execFileSync, spawn } from 'node:child_process';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
 
-const appPath = path.resolve(
+const packagePath = path.resolve(
   'out',
   `SURFBOARD-${process.platform}-${process.arch}`,
+);
+const appPath = path.join(
+  packagePath,
   process.platform === 'darwin'
     ? 'SURFBOARD.app/Contents/MacOS/surfboard'
     : 'surfboard',
@@ -13,6 +16,15 @@ const appPath = path.resolve(
 if (!existsSync(appPath)) {
   throw new Error(
     `Packaged app not found at ${appPath}. Run npm run package first.`,
+  );
+}
+
+const appBundlePath = path.join(packagePath, 'SURFBOARD.app');
+if (process.platform === 'darwin') {
+  execFileSync(
+    'codesign',
+    ['--verify', '--deep', '--strict', '--verbose=2', appBundlePath],
+    { stdio: 'inherit' },
   );
 }
 

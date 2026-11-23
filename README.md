@@ -33,7 +33,7 @@ npm run package
 npm run test:package
 ```
 
-`test:package` launches the packaged `.app` with a deterministic localhost fixture. It verifies that Chromium/CDP, screenshots, click dispatch, and a real `node-pty` shell all work inside the ASAR-packaged application.
+`test:package` verifies the final macOS code signature, then launches the packaged `.app` with a deterministic localhost fixture. It checks that Chromium/CDP, screenshots, click dispatch, and a real `node-pty` shell all work inside the ASAR-packaged application.
 
 ## MCP agent access
 
@@ -61,7 +61,7 @@ Audit entries are written to `agent-audit.ndjson` under Electron's user-data dir
 
 Forge only bundles Vite sources by default. `node-pty` and `node-addon-api` are explicitly retained, `node-pty` is rebuilt for Electron, and the entire PTY package (including `spawn-helper`) is unpacked from ASAR. Production fuses disable `RunAsNode`, Node CLI inspection, and loading the app from outside ASAR.
 
-The current build is development-signed/personal-use. Add organization signing/notarization before distributing macOS binaries publicly.
+Forge applies a final ad-hoc macOS signature after Electron fuses have modified the executable, then verifies the complete bundle. This avoids a damaged-app rejection for personal-use builds, but Gatekeeper still identifies it as an unnotarized, non-Developer-ID release. Add organization signing and notarization before broad public distribution.
 
 ## Downloads
 
