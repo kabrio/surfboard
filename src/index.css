@@ -1,0 +1,389 @@
+:root {
+  color-scheme: dark;
+  --ground: #0c0c0c;
+  --panel: #111;
+  --control: #161616;
+  --control-hover: #1b1b1b;
+  --text: #d8d8d8;
+  --secondary: #8f8f8f;
+  --muted: #565656;
+  --border: #2c2c2c;
+  --inverted-ground: #f4f4f2;
+  --inverted-text: #0c0c0c;
+  --connected: #68c48c;
+  --failed: #d57b7b;
+  --busy: #c89f54;
+  font-family:
+    ui-monospace, 'SF Mono', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
+  font-size: 13px;
+  font-synthesis: none;
+  letter-spacing: 0.03em;
+  text-rendering: optimizeLegibility;
+  text-transform: lowercase;
+  background: var(--ground);
+  color: var(--text);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+button,
+input {
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+}
+
+button {
+  color: inherit;
+}
+
+button:focus-visible,
+input:focus-visible {
+  outline: 1px solid var(--text);
+  outline-offset: -2px;
+}
+
+.app-shell {
+  display: grid;
+  grid-template-rows: 46px 42px minmax(0, 1fr) auto;
+  width: 100%;
+  height: 100%;
+  background: var(--ground);
+}
+
+.titlebar {
+  display: grid;
+  grid-template-columns: 180px 1fr 180px;
+  align-items: center;
+  padding: 0 12px 0 82px;
+  border-bottom: 1px solid var(--border);
+  background: var(--panel);
+  -webkit-app-region: drag;
+  user-select: none;
+}
+
+.brand {
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.workspace-name {
+  justify-self: center;
+  color: var(--secondary);
+  font-size: 11px;
+}
+
+.new-window-button,
+.secondary-button,
+.empty-actions button {
+  border: 1px solid var(--border);
+  border-radius: 0;
+  background: var(--control);
+  padding: 6px 10px;
+  cursor: pointer;
+  -webkit-app-region: no-drag;
+  transition: background 60ms linear;
+}
+
+.new-window-button:hover,
+.secondary-button:hover,
+.empty-actions button:hover,
+.icon-button:hover:not(:disabled) {
+  background: var(--control-hover);
+}
+
+.new-window-button {
+  justify-self: end;
+  font-size: 11px;
+}
+
+.tabbar {
+  display: flex;
+  min-width: 0;
+  align-items: end;
+  gap: 6px;
+  padding: 5px 8px 0;
+  border-bottom: 1px solid var(--border);
+  background: var(--panel);
+}
+
+.tabs {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  gap: 1px;
+  overflow-x: auto;
+}
+
+.tab {
+  display: flex;
+  min-width: 145px;
+  max-width: 260px;
+  height: 34px;
+  align-items: center;
+  border: 1px solid transparent;
+  border-bottom: 0;
+  background: var(--control);
+  color: var(--secondary);
+}
+
+.tab.active {
+  border-color: var(--border);
+  background: var(--ground);
+  color: var(--text);
+}
+
+.tab-select {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  align-items: center;
+  gap: 8px;
+  border: 0;
+  background: transparent;
+  padding: 0 5px 0 10px;
+  cursor: pointer;
+}
+
+.tab-kind {
+  color: var(--secondary);
+  font-size: 11px;
+}
+
+.tab-title {
+  overflow: hidden;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tab-close {
+  width: 26px;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.tab-close:hover {
+  color: var(--text);
+}
+
+.tab-actions {
+  display: flex;
+  padding-bottom: 4px;
+}
+
+.icon-button {
+  width: 30px;
+  height: 28px;
+  border: 1px solid transparent;
+  border-radius: 0;
+  background: transparent;
+  cursor: pointer;
+  transition: background 60ms linear;
+}
+
+.icon-button:disabled {
+  cursor: default;
+  color: var(--muted);
+}
+
+.content {
+  min-width: 0;
+  min-height: 0;
+}
+
+.browser-pane,
+.terminal-pane {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+.browser-pane {
+  grid-template-rows: 40px minmax(0, 1fr);
+}
+
+.browser-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 5px 8px;
+  border-bottom: 1px solid var(--border);
+  background: var(--panel);
+}
+
+.address-form {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  align-items: center;
+  gap: 8px;
+  margin: 0 4px;
+}
+
+.address-input {
+  width: 100%;
+  height: 28px;
+  border: 1px solid var(--border);
+  border-radius: 0;
+  outline: 0;
+  background: var(--control);
+  padding: 0 11px 0 27px;
+  color: var(--text);
+  font-size: 12px;
+}
+
+.load-dot {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  margin-left: 11px;
+  background: var(--muted);
+}
+
+.load-dot.loading {
+  background: var(--busy);
+}
+
+.browser-host,
+.terminal-host {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+.terminal-pane {
+  position: relative;
+  padding: 8px;
+}
+
+.terminal-host .xterm,
+.terminal-host .xterm-viewport {
+  height: 100%;
+}
+
+.terminal-exit {
+  position: absolute;
+  right: 18px;
+  bottom: 16px;
+  border: 1px solid var(--failed);
+  background: var(--panel);
+  padding: 6px 9px;
+  color: var(--failed);
+  font-size: 11px;
+}
+
+.empty-state {
+  display: grid;
+  height: 100%;
+  place-content: center;
+  text-align: center;
+}
+
+.empty-state h1 {
+  margin: 0;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.empty-state p {
+  color: var(--secondary);
+}
+
+.empty-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1px;
+}
+
+.empty-actions button:first-child {
+  border-color: var(--inverted-ground);
+  background: var(--inverted-ground);
+  color: var(--inverted-text);
+}
+
+.agent-panel {
+  display: flex;
+  min-height: 47px;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 10px;
+  border-top: 1px solid var(--border);
+  background: var(--panel);
+}
+
+.agent-copy {
+  display: flex;
+  min-width: 270px;
+  align-items: center;
+  gap: 8px;
+}
+
+.agent-copy strong,
+.agent-copy small {
+  display: block;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.agent-copy small {
+  margin-top: 2px;
+  color: var(--secondary);
+}
+
+.status-light {
+  width: 6px;
+  height: 6px;
+  background: var(--muted);
+}
+
+.status-light.connected {
+  background: var(--connected);
+}
+
+.mcp-url {
+  min-width: 0;
+  flex: 1;
+  overflow: hidden;
+  color: var(--secondary);
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 760px) {
+  .titlebar {
+    grid-template-columns: 1fr auto;
+  }
+
+  .workspace-name {
+    display: none;
+  }
+
+  .agent-copy {
+    min-width: 0;
+    flex: 1;
+  }
+
+  .agent-copy small,
+  .mcp-url {
+    display: none;
+  }
+}

@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="SURFBOARD unifies a Chromium browser and real terminal sessions in one desktop workspace."
+    />
+    <title>SURFBOARD — browser + terminal</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main>
+      <header class="hero">
+        <p class="eyebrow">browser / terminal / agent control</p>
+        <h1>SURFBOARD</h1>
+        <p class="lede">
+          one workspace for the web and the command line. tabs can be a chromium
+          browser or a real terminal, and coding agents can operate the adjacent
+          browser through a local, permissioned mcp connection.
+        </p>
+        <nav aria-label="Project links">
+          <a
+            class="button primary"
+            href="https://github.com/kabrio/surfboard/releases/latest"
+            >latest release</a
+          >
+          <a class="button" href="https://github.com/kabrio/surfboard"
+            >source</a
+          >
+        </nav>
+      </header>
+
+      <section class="panel download-panel" aria-labelledby="download-title">
+        <div class="panel-title">
+          <h2 id="download-title">download</h2>
+          <span id="release-status" class="status">checking release…</span>
+        </div>
+        <div id="release-meta" class="release-meta" hidden></div>
+        <div id="downloads" class="downloads" aria-live="polite">
+          <p class="muted">
+            release assets will appear here when the first build is published.
+          </p>
+        </div>
+        <p class="note">
+          mac builds are currently developer-signed. on first launch, use open
+          from finder if macos shows an unsigned-app warning. checksums are
+          published with every release.
+        </p>
+      </section>
+
+      <section class="panels" aria-label="Product overview">
+        <article class="panel">
+          <h2>equal-status tabs</h2>
+          <p>
+            create, reorder, close, and move browser and terminal tabs without
+            changing tools or mental models.
+          </p>
+        </article>
+        <article class="panel">
+          <h2>real chromium</h2>
+          <p>
+            persistent browsing, downloads, devtools, screenshots, console and
+            network diagnostics, accessibility inspection, and modern web
+            compatibility.
+          </p>
+        </article>
+        <article class="panel">
+          <h2>real shell</h2>
+          <p>
+            interactive ptys, resize, unicode, scrollback, colors, links, and
+            child-process cleanup. no command runner pretending to be a
+            terminal.
+          </p>
+        </article>
+        <article class="panel">
+          <h2>agent bridge</h2>
+          <p>
+            opt-in local mcp access with a per-user bearer capability. page
+            control is typed and visible; terminal, cookies, raw cdp, shell, and
+            filesystem access are not exposed.
+          </p>
+        </article>
+      </section>
+
+      <section class="panel">
+        <h2>open source</h2>
+        <p>
+          implementation, tests, packaging, and release automation live in the
+          repository.
+        </p>
+        <a href="https://github.com/kabrio/surfboard"
+          >github.com/kabrio/surfboard</a
+        >
+      </section>
+
+      <footer>
+        <span>MIT licensed</span>
+        <a href="https://github.com/kabrio/surfboard/issues">report an issue</a>
+      </footer>
+    </main>
+    <script src="./app.js" defer></script>
+  </body>
+</html>
