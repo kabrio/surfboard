@@ -65,8 +65,8 @@ The current build is development-signed/personal-use. Add organization signing/n
 
 ## Downloads
 
-The public download site is served from `docs/` through GitHub Pages. Tagged
-releases trigger macOS and Linux builds, upload package checksums, and become
-available at:
+The public download site is served directly from `docs/` by GitHub Pages.
+Tagged releases trigger macOS and Linux builds, upload package checksums, and
+become available at:
 
 https://kabrio.github.io/surfboard/
