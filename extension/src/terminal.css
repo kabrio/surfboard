@@ -1,0 +1,97 @@
+:root {
+  color-scheme: dark;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue',
+    sans-serif;
+  background: #0c0c0c;
+  color: #e5e5e5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+button {
+  color: inherit;
+  font: inherit;
+}
+
+.terminal-shell {
+  display: grid;
+  grid-template-rows: 43px minmax(0, 1fr);
+  width: 100%;
+  height: 100%;
+  background: #0c0c0c;
+}
+
+.terminal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 7px 9px 7px 12px;
+  border-bottom: 1px solid #292929;
+  background: #141414;
+}
+
+.terminal-header strong,
+.terminal-header span {
+  display: block;
+}
+
+.terminal-header strong {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+}
+
+.terminal-header span {
+  max-width: 320px;
+  margin-top: 2px;
+  overflow: hidden;
+  color: #929292;
+  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.terminal-header span.failed {
+  color: #d57b7b;
+}
+
+.terminal-actions {
+  display: flex;
+  gap: 3px;
+}
+
+.terminal-actions button {
+  width: 27px;
+  height: 27px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.terminal-actions button:hover {
+  border-color: #333;
+  background: #202020;
+}
+
+#terminal {
+  min-height: 0;
+  padding: 8px 5px 5px 9px;
+}
+
+.xterm,
+.xterm-viewport {
+  height: 100%;
+}

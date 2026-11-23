@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SURFBOARD Terminal</title>
+  </head>
+  <body>
+    <main class="terminal-shell">
+      <header class="terminal-header">
+        <div>
+          <strong>SURFBOARD</strong>
+          <span id="terminal-status">Connecting to native host…</span>
+        </div>
+        <div class="terminal-actions">
+          <button id="reconnect" type="button" title="Reconnect">↻</button>
+          <button id="open-tab" type="button" title="Open in browser tab">
+            ↗
+          </button>
+        </div>
+      </header>
+      <section id="terminal" aria-label="Terminal"></section>
+    </main>
+    <script type="module" src="/src/terminal.js"></script>
+  </body>
+</html>

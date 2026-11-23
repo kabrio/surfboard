@@ -12,6 +12,9 @@
   "main": ".vite/build/main.cjs",
   "scripts": {
     "start": "electron-forge start",
+    "build:extension": "vite build --config extension/vite.config.mjs",
+    "build:native-host": "swift build --package-path extension/native-host -c release",
+    "install:chrome-host": "node extension/scripts/install-host.mjs",
     "package": "electron-forge package",
     "make": "electron-forge make",
     "release": "electron-forge release",
