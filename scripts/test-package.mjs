@@ -6,8 +6,8 @@ const appPath = path.resolve(
   'out',
   `SURFBOARD-${process.platform}-${process.arch}`,
   process.platform === 'darwin'
-    ? 'SURFBOARD.app/Contents/MacOS/SURFBOARD'
-    : 'SURFBOARD',
+    ? 'SURFBOARD.app/Contents/MacOS/surfboard'
+    : 'surfboard',
 );
 
 if (!existsSync(appPath)) {
